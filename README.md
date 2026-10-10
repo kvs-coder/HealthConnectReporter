@@ -11,7 +11,7 @@ Health Connect types never appear in the public API: you work with `HealthType`,
 
 It is the Health Connect sibling of [HealthKitReporter](https://github.com/kvs-coder/HealthKitReporter) and [SamsungHealthReporter](https://github.com/kvs-coder/SamsungHealthReporter) and follows the same design: one `HealthConnectReporter` with a **reader**, a **writer**, an **observer** and a **manager**.
 
-> **Status**: under construction. The facade, availability check, types, payloads and the reader exist; the services follow (see `AGENTS.md`). Nothing is released yet.
+> **Status**: under construction. The facade, availability check, types, payloads, the reader and the writer exist; the services follow (see `AGENTS.md`). Nothing is released yet.
 
 ## Requirements
 
@@ -81,6 +81,26 @@ val quarterHours = reporter.reader.aggregate(setOf(Aggregation.HEART_RATE_BPM_AV
 ```
 
 Without the `READ_HEALTH_DATA_HISTORY` permission Health Connect returns only data from 30 days before the first permission grant onwards. Types that need a Health Connect feature (`HealthType.feature`) throw `HealthConnectException.NotAvailable` when the device lacks it.
+
+### Writing
+
+```kotlin
+// Insert: missing client record ids are generated; the result carries the Health Connect ids
+val stored: WritableSample = reporter.writer.insert(
+    Steps(startTimestamp = start, endTimestamp = end, harmonized = Steps.Harmonized(count = 1200)),
+)
+val batch: List<WritableSample> = reporter.writer.insert(listOf(weight, heartRate))
+
+// Update: by clientRecordId (bump clientRecordVersion to win), else by id
+reporter.writer.update((stored as Steps).copy(harmonized = Steps.Harmonized(count = 1300), clientRecordVersion = 2))
+
+// Delete
+reporter.writer.delete(stored)
+reporter.writer.delete(HealthType.STEPS, ids = listOf("…"), clientRecordIds = listOf("…"))
+reporter.writer.delete(HealthType.STEPS, TimeRange.day())
+```
+
+Samples are written as manual entries unless `recordingMethod` says otherwise; actively and automatically recorded samples need a `device`.
 
 ### Manifest
 

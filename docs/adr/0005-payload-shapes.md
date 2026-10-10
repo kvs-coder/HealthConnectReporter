@@ -15,7 +15,7 @@ Payloads follow SamsungHealthReporter's shape (`startTimestamp`, `endTimestamp`,
 - `HealthType.identifier` equals SamsungHealthReporter's where the concept matches (`HYDRATION` → `water_intake`, `OXYGEN_SATURATION` → `blood_oxygen`, `EXERCISE_SESSION` → `exercise`, `SLEEP_SESSION` → `sleep`); the payload's `@SerialName` is the identifier.
 - Instantaneous records store their time in `startTimestamp`; `endTimestamp` and `endZoneOffsetSeconds` are null.
 - Records without values (`IntermenstrualBleeding`, `MenstruationPeriod`) have no `harmonized`.
-- Write metadata: `id` → `…WithId` factory (Health Connect drops `clientRecordId` there), else `clientRecordId` → factory with id and version, else the plain factory; actively and automatically recorded samples need a `device`.
+- Write metadata comes from the `Metadata` factory of the sample's recording method (see ADR 0006 for identity); actively and automatically recorded samples need a `device`.
 - `ExerciseSession.harmonized.isRouteConsentRequired` reports a route the app may not read yet; it is ignored when written.
 - Planned steps' goals and targets are sealed `CompletionGoal` / `PerformanceTarget` hierarchies with a `type` discriminator; unknown client goals map to `Unknown`.
 - Value enums map Health Connect int constants entry for entry; constants added later map to an `UNKNOWN` (or `OTHER_WORKOUT`, `OTHER`, `INCONCLUSIVE`) fallback.

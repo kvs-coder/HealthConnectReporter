@@ -19,6 +19,7 @@ import com.kvs.healthconnectreporter.decorator.metadata
 import com.kvs.healthconnectreporter.decorator.recordClass
 import com.kvs.healthconnectreporter.decorator.sample
 import com.kvs.healthconnectreporter.decorator.withClientRecordId
+import com.kvs.healthconnectreporter.decorator.withId
 import com.kvs.healthconnectreporter.device
 import com.kvs.healthconnectreporter.exerciseSession
 import com.kvs.healthconnectreporter.model.DataOrigin
@@ -135,8 +136,16 @@ class ConversionTest {
     @Test
     fun `metadata uses the factory of the recording method`() {
         RecordingMethod.entries.forEach { method ->
-            val withId = steps.copy(id = "id-1", recordingMethod = method, device = device).metadata()
-            val withClientId = steps.copy(clientRecordVersion = 3, recordingMethod = method, device = device).metadata()
+            val withId =
+                steps
+                    .copy(
+                        id = "id-1",
+                        clientRecordId = null,
+                        recordingMethod = method,
+                        device = device,
+                    ).metadata()
+            val withClientId =
+                steps.copy(id = "id-1", clientRecordVersion = 3, recordingMethod = method, device = device).metadata()
             val plain = steps.copy(clientRecordId = null, recordingMethod = method, device = device).metadata()
 
             assertEquals(method, Steps.from(record(withId)).recordingMethod, method.name)
@@ -212,6 +221,13 @@ class ConversionTest {
     fun `with client record id copies every sample type`() {
         allSamples.filterIsInstance<WritableSample>().forEach {
             assertEquals("new", it.withClientRecordId("new").clientRecordId, it.healthType.identifier)
+        }
+    }
+
+    @Test
+    fun `with id copies every sample type`() {
+        allSamples.filterIsInstance<WritableSample>().forEach {
+            assertEquals("id-1", it.withId("id-1").id, it.healthType.identifier)
         }
     }
 

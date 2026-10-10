@@ -12,6 +12,7 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 import kotlin.test.assertSame
 
 class HealthConnectReporterTest {
@@ -54,6 +55,7 @@ class HealthConnectReporterTest {
 
         assertSame(client, sut.client)
         assertSame(client, sut.reader.client)
+        assertNotNull(sut.writer)
     }
 
     @Test

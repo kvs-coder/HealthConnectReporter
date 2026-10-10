@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.health.connect.client.HealthConnectClient
 import com.kvs.healthconnectreporter.model.Availability
 import com.kvs.healthconnectreporter.service.HealthConnectReader
+import com.kvs.healthconnectreporter.service.HealthConnectWriter
 
 /**
  * **HealthConnectReporter** entry point to Health Connect.
@@ -16,6 +17,9 @@ public class HealthConnectReporter internal constructor(
 ) {
     /** **HealthConnectReader** reads and aggregates data */
     public val reader: HealthConnectReader = HealthConnectReader(client)
+
+    /** **HealthConnectWriter** inserts, updates and deletes data */
+    public val writer: HealthConnectWriter = HealthConnectWriter(client)
 
     /**
      * Connects to Health Connect.

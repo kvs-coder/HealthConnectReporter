@@ -73,7 +73,7 @@ kover {
                 // kotlinx.serialization-generated code on @Serializable lines (write${'$'}Self, deserialization
                 // constructors), unreachable from the library's encodeDefaults JSON.
                 minBound(100, CoverageUnit.LINE)
-                minBound(74, CoverageUnit.BRANCH)
+                minBound(75, CoverageUnit.BRANCH)
             }
         }
     }

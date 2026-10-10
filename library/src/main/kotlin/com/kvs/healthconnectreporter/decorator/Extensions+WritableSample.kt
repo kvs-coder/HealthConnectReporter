@@ -141,9 +141,55 @@ internal fun WritableSample.withClientRecordId(clientRecordId: String): Writable
         is WheelchairPushes -> copy(clientRecordId = clientRecordId)
     }
 
+internal fun WritableSample.withId(id: String): WritableSample =
+    when (this) {
+        is ActiveCaloriesBurned -> copy(id = id)
+        is BasalBodyTemperature -> copy(id = id)
+        is BasalMetabolicRate -> copy(id = id)
+        is BloodGlucose -> copy(id = id)
+        is BloodPressure -> copy(id = id)
+        is BodyFat -> copy(id = id)
+        is BodyTemperature -> copy(id = id)
+        is BodyWaterMass -> copy(id = id)
+        is BoneMass -> copy(id = id)
+        is CervicalMucus -> copy(id = id)
+        is CyclingPedalingCadence -> copy(id = id)
+        is Distance -> copy(id = id)
+        is ElevationGained -> copy(id = id)
+        is ExerciseSession -> copy(id = id)
+        is FloorsClimbed -> copy(id = id)
+        is HeartRate -> copy(id = id)
+        is HeartRateVariabilityRmssd -> copy(id = id)
+        is Height -> copy(id = id)
+        is Hydration -> copy(id = id)
+        is IntermenstrualBleeding -> copy(id = id)
+        is LeanBodyMass -> copy(id = id)
+        is MenstruationFlow -> copy(id = id)
+        is MenstruationPeriod -> copy(id = id)
+        is MindfulnessSession -> copy(id = id)
+        is Nutrition -> copy(id = id)
+        is OvulationTest -> copy(id = id)
+        is OxygenSaturation -> copy(id = id)
+        is PlannedExerciseSession -> copy(id = id)
+        is Power -> copy(id = id)
+        is RespiratoryRate -> copy(id = id)
+        is RestingHeartRate -> copy(id = id)
+        is SexualActivity -> copy(id = id)
+        is SkinTemperature -> copy(id = id)
+        is SleepSession -> copy(id = id)
+        is Speed -> copy(id = id)
+        is Steps -> copy(id = id)
+        is StepsCadence -> copy(id = id)
+        is TotalCaloriesBurned -> copy(id = id)
+        is Vo2Max -> copy(id = id)
+        is Weight -> copy(id = id)
+        is WheelchairPushes -> copy(id = id)
+    }
+
 /**
  * The record metadata: the `Metadata` factory for [WritableSample.recordingMethod] (manual entry by default),
- * with the stored [WritableSample.id] when there is one, else with [WritableSample.clientRecordId].
+ * with [WritableSample.clientRecordId] and its version when there is one, else with the stored [WritableSample.id]
+ * (Health Connect's `…WithId` factories are only for records without a client record id).
  *
  * @throws HealthConnectException.InvalidValue when an actively or automatically recorded sample has no device
  */
@@ -155,29 +201,29 @@ internal fun WritableSample.metadata(): Metadata {
     return when (recordingMethod ?: RecordingMethod.MANUAL_ENTRY) {
         RecordingMethod.MANUAL_ENTRY ->
             when {
-                id != null -> Metadata.manualEntryWithId(id, device)
                 clientRecordId != null -> Metadata.manualEntry(clientRecordId, version, device)
+                id != null -> Metadata.manualEntryWithId(id, device)
                 else -> Metadata.manualEntry(device)
             }
         RecordingMethod.UNKNOWN ->
             when {
-                id != null -> Metadata.unknownRecordingMethodWithId(id, device)
                 clientRecordId != null -> Metadata.unknownRecordingMethod(clientRecordId, version, device)
+                id != null -> Metadata.unknownRecordingMethodWithId(id, device)
                 else -> Metadata.unknownRecordingMethod(device)
             }
         RecordingMethod.ACTIVELY_RECORDED -> {
             val recorder = device ?: throw missingDevice()
             when {
-                id != null -> Metadata.activelyRecordedWithId(id, recorder)
                 clientRecordId != null -> Metadata.activelyRecorded(recorder, clientRecordId, version)
+                id != null -> Metadata.activelyRecordedWithId(id, recorder)
                 else -> Metadata.activelyRecorded(recorder)
             }
         }
         RecordingMethod.AUTOMATICALLY_RECORDED -> {
             val recorder = device ?: throw missingDevice()
             when {
-                id != null -> Metadata.autoRecordedWithId(id, recorder)
                 clientRecordId != null -> Metadata.autoRecorded(recorder, clientRecordId, version)
+                id != null -> Metadata.autoRecordedWithId(id, recorder)
                 else -> Metadata.autoRecorded(recorder)
             }
         }

@@ -37,6 +37,7 @@ public final class com/kvs/healthconnectreporter/HealthConnectReporter {
 	public static final field Companion Lcom/kvs/healthconnectreporter/HealthConnectReporter$Companion;
 	public fun <init> (Landroid/content/Context;)V
 	public final fun getReader ()Lcom/kvs/healthconnectreporter/service/HealthConnectReader;
+	public final fun getWriter ()Lcom/kvs/healthconnectreporter/service/HealthConnectWriter;
 }
 
 public final class com/kvs/healthconnectreporter/HealthConnectReporter$Companion {
@@ -5151,5 +5152,17 @@ public final class com/kvs/healthconnectreporter/service/HealthConnectReader_Agg
 	public static final fun aggregate (Lcom/kvs/healthconnectreporter/service/HealthConnectReader;Ljava/util/Set;Lcom/kvs/healthconnectreporter/model/TimeRange;Lcom/kvs/healthconnectreporter/model/TimeGroup;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun aggregate$default (Lcom/kvs/healthconnectreporter/service/HealthConnectReader;Lcom/kvs/healthconnectreporter/model/type/Aggregation;Lcom/kvs/healthconnectreporter/model/TimeRange;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun aggregate$default (Lcom/kvs/healthconnectreporter/service/HealthConnectReader;Ljava/util/Set;Lcom/kvs/healthconnectreporter/model/TimeRange;Lcom/kvs/healthconnectreporter/model/TimeGroup;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/kvs/healthconnectreporter/service/HealthConnectWriter {
+	public static final field MAX_BATCH_SIZE I
+	public final fun delete (Lcom/kvs/healthconnectreporter/model/payload/WritableSample;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun delete (Lcom/kvs/healthconnectreporter/model/type/HealthType;Lcom/kvs/healthconnectreporter/model/TimeRange;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun delete (Lcom/kvs/healthconnectreporter/model/type/HealthType;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun delete$default (Lcom/kvs/healthconnectreporter/service/HealthConnectWriter;Lcom/kvs/healthconnectreporter/model/type/HealthType;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun insert (Lcom/kvs/healthconnectreporter/model/payload/WritableSample;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun insert (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun update (Lcom/kvs/healthconnectreporter/model/payload/WritableSample;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun update (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
