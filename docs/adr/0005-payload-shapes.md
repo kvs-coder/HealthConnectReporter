@@ -20,6 +20,8 @@ Payloads follow SamsungHealthReporter's shape (`startTimestamp`, `endTimestamp`,
 - Planned steps' goals and targets are sealed `CompletionGoal` / `PerformanceTarget` hierarchies with a `type` discriminator; unknown client goals map to `Unknown`.
 - Value enums map Health Connect int constants entry for entry; constants added later map to an `UNKNOWN` (or `OTHER_WORKOUT`, `OTHER`, `INCONCLUSIVE`) fallback.
 
+- `Aggregation` has no entry for `MindfulnessSessionRecord.MINDFULNESS_DURATION_TOTAL`: connect-client 1.1.0 maps it to no platform metric, so it fails on every Android 14+ device (found on a Pixel 7a, Android 17). Add it when the client minimum supports it.
+
 ## Consequences
 
 - Dart models can share identifiers and most fields with the Samsung Health plugin.

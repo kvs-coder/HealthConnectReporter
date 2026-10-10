@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 /**
  * **Aggregation** one aggregate Health Connect computes over a [healthType], named after its `AggregateMetric`.
  *
+ * Health Connect client 1.1.0 can't aggregate mindfulness sessions on Android 14+, so they have no aggregation.
+ *
  * Values are reported in the canonical units: durations in milliseconds, masses in kg, energy in kcal.
  *
  * @property healthType **HealthType** the aggregated type
@@ -83,9 +85,6 @@ public enum class Aggregation(
 
     /** total water intake */
     HYDRATION_VOLUME_TOTAL(HealthType.HYDRATION, "L"),
-
-    /** total mindfulness duration */
-    MINDFULNESS_SESSION_MINDFULNESS_DURATION_TOTAL(HealthType.MINDFULNESS_SESSION, "ms"),
 
     /** total biotin */
     NUTRITION_BIOTIN_TOTAL(HealthType.NUTRITION, "kg"),

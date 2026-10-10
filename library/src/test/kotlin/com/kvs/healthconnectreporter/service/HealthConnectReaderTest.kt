@@ -302,7 +302,7 @@ class HealthConnectReaderTest {
             }
             assertFailsWith<HealthConnectException.NotAvailable> {
                 sut.aggregate(
-                    setOf(Aggregation.MINDFULNESS_SESSION_MINDFULNESS_DURATION_TOTAL),
+                    setOf(Aggregation.SKIN_TEMPERATURE_TEMPERATURE_DELTA_MAX),
                     range,
                     TimeGroup.Duration(1),
                 )

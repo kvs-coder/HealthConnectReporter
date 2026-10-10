@@ -1,10 +1,7 @@
-@file:OptIn(ExperimentalMindfulnessSessionApi::class)
-
 package com.kvs.healthconnectreporter.decorator
 
 import androidx.health.connect.client.aggregate.AggregateMetric
 import androidx.health.connect.client.aggregate.AggregationResult
-import androidx.health.connect.client.feature.ExperimentalMindfulnessSessionApi
 import androidx.health.connect.client.records.ActiveCaloriesBurnedRecord
 import androidx.health.connect.client.records.BasalMetabolicRateRecord
 import androidx.health.connect.client.records.BloodPressureRecord
@@ -16,7 +13,6 @@ import androidx.health.connect.client.records.FloorsClimbedRecord
 import androidx.health.connect.client.records.HeartRateRecord
 import androidx.health.connect.client.records.HeightRecord
 import androidx.health.connect.client.records.HydrationRecord
-import androidx.health.connect.client.records.MindfulnessSessionRecord
 import androidx.health.connect.client.records.NutritionRecord
 import androidx.health.connect.client.records.PowerRecord
 import androidx.health.connect.client.records.RestingHeartRateRecord
@@ -56,8 +52,6 @@ internal val Aggregation.metric: AggregateMetric<Any>
             Aggregation.HEIGHT_HEIGHT_MIN -> HeightRecord.HEIGHT_MIN
             Aggregation.HEIGHT_HEIGHT_MAX -> HeightRecord.HEIGHT_MAX
             Aggregation.HYDRATION_VOLUME_TOTAL -> HydrationRecord.VOLUME_TOTAL
-            Aggregation.MINDFULNESS_SESSION_MINDFULNESS_DURATION_TOTAL ->
-                MindfulnessSessionRecord.MINDFULNESS_DURATION_TOTAL
             Aggregation.NUTRITION_BIOTIN_TOTAL -> NutritionRecord.BIOTIN_TOTAL
             Aggregation.NUTRITION_CAFFEINE_TOTAL -> NutritionRecord.CAFFEINE_TOTAL
             Aggregation.NUTRITION_CALCIUM_TOTAL -> NutritionRecord.CALCIUM_TOTAL

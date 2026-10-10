@@ -4660,7 +4660,6 @@ public final class com/kvs/healthconnectreporter/model/type/Aggregation : java/l
 	public static final field HEIGHT_HEIGHT_MAX Lcom/kvs/healthconnectreporter/model/type/Aggregation;
 	public static final field HEIGHT_HEIGHT_MIN Lcom/kvs/healthconnectreporter/model/type/Aggregation;
 	public static final field HYDRATION_VOLUME_TOTAL Lcom/kvs/healthconnectreporter/model/type/Aggregation;
-	public static final field MINDFULNESS_SESSION_MINDFULNESS_DURATION_TOTAL Lcom/kvs/healthconnectreporter/model/type/Aggregation;
 	public static final field NUTRITION_BIOTIN_TOTAL Lcom/kvs/healthconnectreporter/model/type/Aggregation;
 	public static final field NUTRITION_CAFFEINE_TOTAL Lcom/kvs/healthconnectreporter/model/type/Aggregation;
 	public static final field NUTRITION_CALCIUM_TOTAL Lcom/kvs/healthconnectreporter/model/type/Aggregation;

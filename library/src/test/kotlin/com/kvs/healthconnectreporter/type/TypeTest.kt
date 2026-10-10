@@ -131,4 +131,9 @@ class TypeTest {
         }
         assertEquals(Aggregation.entries.size, HealthType.entries.sumOf { it.aggregations.size })
     }
+
+    @Test
+    fun `mindfulness has no aggregation because the client can't run it on Android 14+`() {
+        assertEquals(emptyList(), HealthType.MINDFULNESS_SESSION.aggregations)
+    }
 }
