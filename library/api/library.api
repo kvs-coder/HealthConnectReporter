@@ -1,0 +1,58 @@
+public abstract class com/kvs/healthconnectreporter/HealthConnectException : java/lang/Exception {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/kvs/healthconnectreporter/HealthConnectException$AnchorExpired : com/kvs/healthconnectreporter/HealthConnectException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/kvs/healthconnectreporter/HealthConnectException$InvalidType : com/kvs/healthconnectreporter/HealthConnectException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/kvs/healthconnectreporter/HealthConnectException$InvalidValue : com/kvs/healthconnectreporter/HealthConnectException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/kvs/healthconnectreporter/HealthConnectException$NotAuthorized : com/kvs/healthconnectreporter/HealthConnectException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/kvs/healthconnectreporter/HealthConnectException$NotAvailable : com/kvs/healthconnectreporter/HealthConnectException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/kvs/healthconnectreporter/HealthConnectException$Platform : com/kvs/healthconnectreporter/HealthConnectException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/kvs/healthconnectreporter/HealthConnectReporter {
+	public static final field Companion Lcom/kvs/healthconnectreporter/HealthConnectReporter$Companion;
+	public fun <init> (Landroid/content/Context;)V
+}
+
+public final class com/kvs/healthconnectreporter/HealthConnectReporter$Companion {
+	public final fun availability (Landroid/content/Context;)Lcom/kvs/healthconnectreporter/model/Availability;
+}
+
+public final class com/kvs/healthconnectreporter/model/Availability : java/lang/Enum {
+	public static final field AVAILABLE Lcom/kvs/healthconnectreporter/model/Availability;
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/Availability$Companion;
+	public static final field UNAVAILABLE Lcom/kvs/healthconnectreporter/model/Availability;
+	public static final field UPDATE_REQUIRED Lcom/kvs/healthconnectreporter/model/Availability;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/kvs/healthconnectreporter/model/Availability;
+	public static fun values ()[Lcom/kvs/healthconnectreporter/model/Availability;
+}
+
+public final class com/kvs/healthconnectreporter/model/Availability$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
