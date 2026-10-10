@@ -11,7 +11,7 @@ Health Connect types never appear in the public API: you work with `HealthType`,
 
 It is the Health Connect sibling of [HealthKitReporter](https://github.com/kvs-coder/HealthKitReporter) and [SamsungHealthReporter](https://github.com/kvs-coder/SamsungHealthReporter) and follows the same design: one `HealthConnectReporter` with a **reader**, a **writer**, an **observer** and a **manager**.
 
-> **Status**: under construction. The facade, availability check, types, payloads and all four services (reader, writer, observer, manager) exist; the demo app follows (see `AGENTS.md`). Nothing is released yet.
+> **Status**: under construction. The facade, availability check, types, payloads and all four services (reader, writer, observer, manager) and the demo app exist (see `AGENTS.md`). Nothing is released yet.
 
 ## Requirements
 
@@ -243,6 +243,10 @@ val sample = Sample.serializer()                  // decodes any payload by its 
 val fromFlutter = Steps.make(from = map)          // throws HealthConnectException.InvalidValue on bad input
 val type = HealthType.make(from = "heart_rate")
 ```
+
+## Example app
+
+`app/` is a Jetpack Compose demo with one row per public call: a Manager, Reader, Writer and Observer section, rows generated from `HealthType.entries` and `Aggregation.entries`. Its manifest declares every health permission, the permissions rationale activity and the `VIEW_PERMISSION_USAGE` activity-alias, so it doubles as a manifest template. Run it on an Android 14+ device or emulator, start with *Manager › Request every permission*, then insert data in *Writer* and read it back.
 
 ## License
 
