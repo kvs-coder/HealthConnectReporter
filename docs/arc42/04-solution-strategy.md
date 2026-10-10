@@ -9,4 +9,4 @@
 | Payloads | `model/payload/`, `model/` | `@Serializable` data classes and value types. |
 | Decorators | `decorator/` | Conversions between payloads and records, units, error wrapping. |
 
-Current state: the facade, `Availability` and `HealthConnectException` exist; the services are planned.
+Current state: the facade, `Availability`, `HealthConnectException`, `HealthType` (41 record types), `Aggregation`, the value enums and one payload per record exist; the services are planned.

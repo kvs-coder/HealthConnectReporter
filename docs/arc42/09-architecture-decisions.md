@@ -6,3 +6,4 @@
 | [0002](../adr/0002-suspend-first-api.md) | Suspend-first API |
 | [0003](../adr/0003-mock-the-client-in-tests.md) | Test services against a mocked `HealthConnectClient` |
 | [0004](../adr/0004-canonical-units.md) | One canonical unit per payload field |
+| [0005](../adr/0005-payload-shapes.md) | Payload shapes for Health Connect records |

@@ -8,6 +8,8 @@ complexity:
     active: false
   CyclomaticComplexMethod:
     threshold: 25
+    # The HealthType / WritableSample registries are exhaustive `when`s with one simple entry per type.
+    ignoreSimpleWhenEntries: true
   LongMethod:
     threshold: 80
 
