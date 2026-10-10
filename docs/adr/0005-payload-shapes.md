@@ -23,4 +23,4 @@ Payloads follow SamsungHealthReporter's shape (`startTimestamp`, `endTimestamp`,
 ## Consequences
 
 - Dart models can share identifiers and most fields with the Samsung Health plugin.
-- Kover branch coverage stays below 100 %: the missed branches are kotlinx.serialization-generated code on `@Serializable` lines.
+- Kover branch coverage stays just below 100 %: `SerializationTest` drives the kotlinx.serialization-generated code (encoding with and without defaults, decoding with each key missing), and the few branches left are generated constructor code.

@@ -60,6 +60,7 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlin.reflect)
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
 }
@@ -73,11 +74,10 @@ kover {
         }
         verify {
             rule {
-                // Raise both to the measured level with every test PR; never lower them. Every missed branch is
-                // kotlinx.serialization-generated code on @Serializable lines (write${'$'}Self, deserialization
-                // constructors), unreachable from the library's encodeDefaults JSON.
+                // Raise both to the measured level with every test PR; never lower them. The missed branches are
+                // kotlinx.serialization-generated constructor code SerializationTest can't reach.
                 minBound(100, CoverageUnit.LINE)
-                minBound(75, CoverageUnit.BRANCH)
+                minBound(99, CoverageUnit.BRANCH)
             }
         }
     }
