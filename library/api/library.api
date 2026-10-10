@@ -36,10 +36,48 @@ public final class com/kvs/healthconnectreporter/HealthConnectException$Platform
 public final class com/kvs/healthconnectreporter/HealthConnectReporter {
 	public static final field Companion Lcom/kvs/healthconnectreporter/HealthConnectReporter$Companion;
 	public fun <init> (Landroid/content/Context;)V
+	public final fun getReader ()Lcom/kvs/healthconnectreporter/service/HealthConnectReader;
 }
 
 public final class com/kvs/healthconnectreporter/HealthConnectReporter$Companion {
 	public final fun availability (Landroid/content/Context;)Lcom/kvs/healthconnectreporter/model/Availability;
+}
+
+public final class com/kvs/healthconnectreporter/model/Aggregate : com/kvs/healthconnectreporter/model/Payload {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/Aggregate$Companion;
+	public fun <init> (Lcom/kvs/healthconnectreporter/model/type/Aggregation;JJLjava/lang/Double;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/kvs/healthconnectreporter/model/type/Aggregation;JJLjava/lang/Double;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lcom/kvs/healthconnectreporter/model/type/Aggregation;
+	public final fun component2 ()J
+	public final fun component3 ()J
+	public final fun component4 ()Ljava/lang/Double;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun copy (Lcom/kvs/healthconnectreporter/model/type/Aggregation;JJLjava/lang/Double;Ljava/lang/String;)Lcom/kvs/healthconnectreporter/model/Aggregate;
+	public static synthetic fun copy$default (Lcom/kvs/healthconnectreporter/model/Aggregate;Lcom/kvs/healthconnectreporter/model/type/Aggregation;JJLjava/lang/Double;Ljava/lang/String;ILjava/lang/Object;)Lcom/kvs/healthconnectreporter/model/Aggregate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAggregation ()Lcom/kvs/healthconnectreporter/model/type/Aggregation;
+	public final fun getEndTimestamp ()J
+	public fun getJson ()Ljava/lang/String;
+	public final fun getStartTimestamp ()J
+	public final fun getUnit ()Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/Double;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class com/kvs/healthconnectreporter/model/Aggregate$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/Aggregate$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/kvs/healthconnectreporter/model/Aggregate;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/kvs/healthconnectreporter/model/Aggregate;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/Aggregate$Companion : com/kvs/healthconnectreporter/model/Payload$Factory {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/kvs/healthconnectreporter/model/Availability : java/lang/Enum {
@@ -118,6 +156,50 @@ public final class com/kvs/healthconnectreporter/model/Device$Companion : com/kv
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class com/kvs/healthconnectreporter/model/Ordering : java/lang/Enum {
+	public static final field ASCENDING Lcom/kvs/healthconnectreporter/model/Ordering;
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/Ordering$Companion;
+	public static final field DESCENDING Lcom/kvs/healthconnectreporter/model/Ordering;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/kvs/healthconnectreporter/model/Ordering;
+	public static fun values ()[Lcom/kvs/healthconnectreporter/model/Ordering;
+}
+
+public final class com/kvs/healthconnectreporter/model/Ordering$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/Page : com/kvs/healthconnectreporter/model/Payload {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/Page$Companion;
+	public fun <init> (Ljava/util/List;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/util/List;Ljava/lang/String;)Lcom/kvs/healthconnectreporter/model/Page;
+	public static synthetic fun copy$default (Lcom/kvs/healthconnectreporter/model/Page;Ljava/util/List;Ljava/lang/String;ILjava/lang/Object;)Lcom/kvs/healthconnectreporter/model/Page;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getItems ()Ljava/util/List;
+	public fun getJson ()Ljava/lang/String;
+	public final fun getNextPageToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class com/kvs/healthconnectreporter/model/Page$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/Page$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/kvs/healthconnectreporter/model/Page;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/kvs/healthconnectreporter/model/Page;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/Page$Companion : com/kvs/healthconnectreporter/model/Payload$Factory {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public abstract interface class com/kvs/healthconnectreporter/model/Payload {
 	public abstract fun getJson ()Ljava/lang/String;
 }
@@ -127,6 +209,73 @@ public abstract class com/kvs/healthconnectreporter/model/Payload$Factory {
 	public final fun collect (Ljava/util/List;)Ljava/util/List;
 	public final fun decode (Ljava/lang/String;)Ljava/lang/Object;
 	public final fun make (Ljava/util/Map;)Ljava/lang/Object;
+}
+
+public abstract interface class com/kvs/healthconnectreporter/model/TimeGroup {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/TimeGroup$Companion;
+}
+
+public final class com/kvs/healthconnectreporter/model/TimeGroup$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/TimeGroup$Duration : com/kvs/healthconnectreporter/model/TimeGroup {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/TimeGroup$Duration$Companion;
+	public fun <init> (J)V
+	public final fun component1 ()J
+	public final fun copy (J)Lcom/kvs/healthconnectreporter/model/TimeGroup$Duration;
+	public static synthetic fun copy$default (Lcom/kvs/healthconnectreporter/model/TimeGroup$Duration;JILjava/lang/Object;)Lcom/kvs/healthconnectreporter/model/TimeGroup$Duration;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDurationMillis ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class com/kvs/healthconnectreporter/model/TimeGroup$Duration$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/TimeGroup$Duration$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/kvs/healthconnectreporter/model/TimeGroup$Duration;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/kvs/healthconnectreporter/model/TimeGroup$Duration;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/TimeGroup$Duration$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/TimeGroup$Period : com/kvs/healthconnectreporter/model/TimeGroup {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/TimeGroup$Period$Companion;
+	public fun <init> (Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;ILjava/lang/String;)V
+	public synthetic fun <init> (Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;ILjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;
+	public final fun component2 ()I
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;ILjava/lang/String;)Lcom/kvs/healthconnectreporter/model/TimeGroup$Period;
+	public static synthetic fun copy$default (Lcom/kvs/healthconnectreporter/model/TimeGroup$Period;Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;ILjava/lang/String;ILjava/lang/Object;)Lcom/kvs/healthconnectreporter/model/TimeGroup$Period;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCount ()I
+	public final fun getUnit ()Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;
+	public final fun getZoneId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class com/kvs/healthconnectreporter/model/TimeGroup$Period$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/TimeGroup$Period$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/kvs/healthconnectreporter/model/TimeGroup$Period;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/kvs/healthconnectreporter/model/TimeGroup$Period;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/TimeGroup$Period$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/kvs/healthconnectreporter/model/TimeRange : com/kvs/healthconnectreporter/model/Payload {
@@ -4955,6 +5104,21 @@ public final class com/kvs/healthconnectreporter/model/type/SpecimenSource$Compa
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class com/kvs/healthconnectreporter/model/type/TimeGroupUnit : java/lang/Enum {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit$Companion;
+	public static final field DAILY Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;
+	public static final field MONTHLY Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;
+	public static final field WEEKLY Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;
+	public static final field YEARLY Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;
+	public static fun values ()[Lcom/kvs/healthconnectreporter/model/type/TimeGroupUnit;
+}
+
+public final class com/kvs/healthconnectreporter/model/type/TimeGroupUnit$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class com/kvs/healthconnectreporter/model/type/Vo2MaxMeasurementMethod : java/lang/Enum {
 	public static final field COOPER_TEST Lcom/kvs/healthconnectreporter/model/type/Vo2MaxMeasurementMethod;
 	public static final field Companion Lcom/kvs/healthconnectreporter/model/type/Vo2MaxMeasurementMethod$Companion;
@@ -4970,5 +5134,22 @@ public final class com/kvs/healthconnectreporter/model/type/Vo2MaxMeasurementMet
 
 public final class com/kvs/healthconnectreporter/model/type/Vo2MaxMeasurementMethod$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/service/HealthConnectReader {
+	public static final field DEFAULT_PAGE_SIZE I
+	public static final field MAX_PAGE_SIZE I
+	public final fun read (Lcom/kvs/healthconnectreporter/model/type/HealthType;Lcom/kvs/healthconnectreporter/model/TimeRange;Lcom/kvs/healthconnectreporter/model/Ordering;Ljava/lang/Integer;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun read (Lcom/kvs/healthconnectreporter/model/type/HealthType;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun read$default (Lcom/kvs/healthconnectreporter/service/HealthConnectReader;Lcom/kvs/healthconnectreporter/model/type/HealthType;Lcom/kvs/healthconnectreporter/model/TimeRange;Lcom/kvs/healthconnectreporter/model/Ordering;Ljava/lang/Integer;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun readPage (Lcom/kvs/healthconnectreporter/model/type/HealthType;Lcom/kvs/healthconnectreporter/model/TimeRange;ILjava/lang/String;Lcom/kvs/healthconnectreporter/model/Ordering;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun readPage$default (Lcom/kvs/healthconnectreporter/service/HealthConnectReader;Lcom/kvs/healthconnectreporter/model/type/HealthType;Lcom/kvs/healthconnectreporter/model/TimeRange;ILjava/lang/String;Lcom/kvs/healthconnectreporter/model/Ordering;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/kvs/healthconnectreporter/service/HealthConnectReader_AggregateKt {
+	public static final fun aggregate (Lcom/kvs/healthconnectreporter/service/HealthConnectReader;Lcom/kvs/healthconnectreporter/model/type/Aggregation;Lcom/kvs/healthconnectreporter/model/TimeRange;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun aggregate (Lcom/kvs/healthconnectreporter/service/HealthConnectReader;Ljava/util/Set;Lcom/kvs/healthconnectreporter/model/TimeRange;Lcom/kvs/healthconnectreporter/model/TimeGroup;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun aggregate$default (Lcom/kvs/healthconnectreporter/service/HealthConnectReader;Lcom/kvs/healthconnectreporter/model/type/Aggregation;Lcom/kvs/healthconnectreporter/model/TimeRange;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun aggregate$default (Lcom/kvs/healthconnectreporter/service/HealthConnectReader;Ljava/util/Set;Lcom/kvs/healthconnectreporter/model/TimeRange;Lcom/kvs/healthconnectreporter/model/TimeGroup;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 

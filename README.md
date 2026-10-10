@@ -11,7 +11,7 @@ Health Connect types never appear in the public API: you work with `HealthType`,
 
 It is the Health Connect sibling of [HealthKitReporter](https://github.com/kvs-coder/HealthKitReporter) and [SamsungHealthReporter](https://github.com/kvs-coder/SamsungHealthReporter) and follows the same design: one `HealthConnectReporter` with a **reader**, a **writer**, an **observer** and a **manager**.
 
-> **Status**: under construction. The facade, availability check, types and payloads exist; the services follow (see `AGENTS.md`). Nothing is released yet.
+> **Status**: under construction. The facade, availability check, types, payloads and the reader exist; the services follow (see `AGENTS.md`). Nothing is released yet.
 
 ## Requirements
 
@@ -47,6 +47,40 @@ when (HealthConnectReporter.availability(context)) {
     Availability.UNAVAILABLE -> { /* Health Connect does not run on this device */ }
 }
 ```
+
+### Reading
+
+```kotlin
+val reporter = HealthConnectReporter(context)
+val range = TimeRange.lastDays(7)
+
+// All heart rate records of the last week, newest first
+val samples: List<Sample> = reporter.reader.read(HealthType.HEART_RATE, range)
+
+// Page by page, oldest first, only from one app
+val page = reporter.reader.readPage(
+    type = HealthType.STEPS,
+    range = range,
+    pageSize = 500,
+    ordering = Ordering.ASCENDING,
+    origins = setOf(DataOrigin("com.google.android.apps.fitness")),
+)
+val next = page.nextPageToken?.let { reporter.reader.readPage(HealthType.STEPS, range, pageToken = it) }
+
+// One record by id
+val sample = reporter.reader.read(HealthType.STEPS, id = "…")
+
+// Totals, and totals per day in the user's zone
+val steps: Aggregate = reporter.reader.aggregate(Aggregation.STEPS_COUNT_TOTAL, range)
+val daily: List<Aggregate> = reporter.reader.aggregate(
+    aggregations = setOf(Aggregation.STEPS_COUNT_TOTAL, Aggregation.DISTANCE_DISTANCE_TOTAL),
+    range = range,
+    group = TimeGroup.Period(TimeGroupUnit.DAILY),
+)
+val quarterHours = reporter.reader.aggregate(setOf(Aggregation.HEART_RATE_BPM_AVG), range, TimeGroup.Duration(900_000))
+```
+
+Without the `READ_HEALTH_DATA_HISTORY` permission Health Connect returns only data from 30 days before the first permission grant onwards. Types that need a Health Connect feature (`HealthType.feature`) throw `HealthConnectException.NotAvailable` when the device lacks it.
 
 ### Manifest
 

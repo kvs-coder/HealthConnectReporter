@@ -11,6 +11,8 @@ import androidx.health.connect.client.units.Temperature
 import androidx.health.connect.client.units.TemperatureDelta
 import androidx.health.connect.client.units.Velocity
 import androidx.health.connect.client.units.Volume
+import com.kvs.healthconnectreporter.HealthConnectException
+import java.time.Duration
 
 // The only place that converts between Health Connect units and the canonical payload units (ADR 0004).
 
@@ -46,3 +48,21 @@ internal val BloodGlucose.millimolesPerLiter: Double get() = inMillimolesPerLite
 
 internal val Double.asPercentage: Percentage get() = Percentage(this)
 internal val Percentage.percent: Double get() = value
+
+/** An aggregated value in its canonical unit: counts as is, durations in milliseconds. */
+internal val Any.canonical: Double
+    get() =
+        when (this) {
+            is Long -> toDouble()
+            is Double -> this
+            is Energy -> kilocalories
+            is Length -> meters
+            is Mass -> kilograms
+            is Power -> watts
+            is Pressure -> millimetersOfMercury
+            is Velocity -> metersPerSecond
+            is Volume -> liters
+            is TemperatureDelta -> celsius
+            is Duration -> millis.toDouble()
+            else -> throw HealthConnectException.InvalidValue("Unsupported aggregate value: $this")
+        }

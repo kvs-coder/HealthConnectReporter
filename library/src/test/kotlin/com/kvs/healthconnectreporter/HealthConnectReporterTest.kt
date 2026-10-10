@@ -53,6 +53,7 @@ class HealthConnectReporterTest {
         val sut = HealthConnectReporter(context)
 
         assertSame(client, sut.client)
+        assertSame(client, sut.reader.client)
     }
 
     @Test

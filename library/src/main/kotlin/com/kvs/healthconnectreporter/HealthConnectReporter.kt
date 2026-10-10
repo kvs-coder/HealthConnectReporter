@@ -3,6 +3,7 @@ package com.kvs.healthconnectreporter
 import android.content.Context
 import androidx.health.connect.client.HealthConnectClient
 import com.kvs.healthconnectreporter.model.Availability
+import com.kvs.healthconnectreporter.service.HealthConnectReader
 
 /**
  * **HealthConnectReporter** entry point to Health Connect.
@@ -13,6 +14,9 @@ import com.kvs.healthconnectreporter.model.Availability
 public class HealthConnectReporter internal constructor(
     internal val client: HealthConnectClient,
 ) {
+    /** **HealthConnectReader** reads and aggregates data */
+    public val reader: HealthConnectReader = HealthConnectReader(client)
+
     /**
      * Connects to Health Connect.
      *

@@ -1,5 +1,7 @@
 package com.kvs.healthconnectreporter
 
+import androidx.health.connect.client.records.Record
+import androidx.health.connect.client.response.ReadRecordsResponse
 import com.kvs.healthconnectreporter.model.Device
 import com.kvs.healthconnectreporter.model.Payload
 import com.kvs.healthconnectreporter.model.payload.ActiveCaloriesBurned
@@ -771,6 +773,12 @@ val HealthType.factory: Payload.Factory<out Sample>
             HealthType.WEIGHT -> Weight
             HealthType.WHEELCHAIR_PUSHES -> WheelchairPushes
         }
+
+/** A Health Connect read response with one page of [records]. */
+fun <T : Record> response(
+    records: List<T>,
+    pageToken: String? = null,
+): ReadRecordsResponse<T> = ReadRecordsResponse(records, pageToken)
 
 /** Parses JSON into the plain map a Flutter plugin would send. */
 @Suppress("UNCHECKED_CAST") // a JSON object always parses to a string-keyed map

@@ -4,9 +4,17 @@ import com.kvs.healthconnectreporter.END
 import com.kvs.healthconnectreporter.HealthConnectException
 import com.kvs.healthconnectreporter.START
 import com.kvs.healthconnectreporter.device
+import com.kvs.healthconnectreporter.heartRate
+import com.kvs.healthconnectreporter.model.Aggregate
 import com.kvs.healthconnectreporter.model.DataOrigin
 import com.kvs.healthconnectreporter.model.Device
+import com.kvs.healthconnectreporter.model.Page
+import com.kvs.healthconnectreporter.model.TimeGroup
 import com.kvs.healthconnectreporter.model.TimeRange
+import com.kvs.healthconnectreporter.model.type.Aggregation
+import com.kvs.healthconnectreporter.model.type.TimeGroupUnit
+import com.kvs.healthconnectreporter.steps
+import kotlinx.serialization.json.Json
 import org.junit.Test
 import java.time.Instant
 import java.time.ZoneId
@@ -73,5 +81,41 @@ class ValueTypeTest {
         val error = assertFailsWith<HealthConnectException.InvalidValue> { TimeRange.lastDays(0) }
 
         assertEquals("Invalid days: 0", error.message)
+    }
+
+    @Test
+    fun `time groups validate their values`() {
+        listOf(
+            { TimeGroup.Duration(0) },
+            { TimeGroup.Period(TimeGroupUnit.DAILY, 0) },
+            { TimeGroup.Period(TimeGroupUnit.DAILY, 1, "Mars/Olympus") },
+        ).forEach { assertFailsWith<HealthConnectException.InvalidValue> { it() } }
+        listOf(
+            """{"type":"duration","durationMillis":0}""",
+            """{"type":"period","unit":"DAILY","count":0}""",
+        ).forEach {
+            assertFailsWith<HealthConnectException.InvalidValue> { Json.decodeFromString(TimeGroup.serializer(), it) }
+        }
+    }
+
+    @Test
+    fun `time groups round trip through json`() {
+        val json = Json
+        listOf(TimeGroup.Duration(60_000), TimeGroup.Period(TimeGroupUnit.MONTHLY)).forEach {
+            assertEquals(
+                it,
+                json.decodeFromString(TimeGroup.serializer(), json.encodeToString(TimeGroup.serializer(), it)),
+            )
+        }
+    }
+
+    @Test
+    fun `page and aggregate round trip through json`() {
+        val page = Page(listOf(steps, heartRate), "next")
+        val aggregate = Aggregate(Aggregation.STEPS_COUNT_TOTAL, START, END, 1200.0)
+
+        assertEquals(page, Page.decode(page.json))
+        assertEquals(aggregate, Aggregate.decode(aggregate.json))
+        assertEquals("count", aggregate.unit)
     }
 }
