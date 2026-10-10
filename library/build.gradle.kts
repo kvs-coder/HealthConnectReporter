@@ -10,6 +10,8 @@ plugins {
 
 android {
     namespace = "com.kvs.healthconnectreporter"
+    // compileSdk is a consumer floor (AAR metadata): raising it to 37 is a breaking change, see AGENTS.md §7.
+    //noinspection GradleDependency
     compileSdk = 36
 
     defaultConfig {
@@ -50,7 +52,6 @@ kotlin {
 dependencies {
     // implementation: Health Connect types never appear in the public API (library.api).
     implementation(libs.health.connect.client)
-    implementation(libs.androidx.core.ktx)
     // api: ActivityResultContract and ComponentActivity are part of the public API (HealthConnectManager).
     api(libs.androidx.activity)
     // api: Flow is part of the public API (HealthConnectObserver.observe).

@@ -2,9 +2,9 @@ package com.kvs.healthconnectreporter.service
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContract
-import androidx.core.net.toUri
 import androidx.health.connect.client.HealthConnectClient
 import com.kvs.healthconnectreporter.HealthConnectException
 import com.kvs.healthconnectreporter.decorator.asPermissions
@@ -104,10 +104,11 @@ public class HealthConnectManager internal constructor(
      * @param context **Context** any context
      * @return **Intent** start it with `startActivity`
      */
+    @Suppress("UseKtx") // core-ktx 1.19 would force compileSdk 37 on consumers; Uri.parse is the same call
     public fun installIntent(context: Context): Intent =
         Intent(Intent.ACTION_VIEW)
             .setPackage(PLAY_STORE_PACKAGE)
-            .setData("market://details?id=$HEALTH_CONNECT_PACKAGE&url=healthconnect%3A%2F%2Fonboarding".toUri())
+            .setData(Uri.parse("market://details?id=$HEALTH_CONNECT_PACKAGE&url=healthconnect%3A%2F%2Fonboarding"))
             .putExtra("overlay", true)
             .putExtra("callerId", context.packageName)
 

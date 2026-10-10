@@ -6,7 +6,8 @@ plugins {
 
 android {
     namespace = "com.kvs.healthconnectreporter.example"
-    compileSdk = 36
+    // The demo uses the newest AndroidX (core 1.19, Compose 1.12, lifecycle 2.11), which compile against 37.
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.kvs.healthconnectreporter.example"
