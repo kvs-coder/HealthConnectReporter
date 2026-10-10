@@ -32,7 +32,7 @@ dependencyResolutionManagement {
 
 // app/build.gradle.kts
 dependencies {
-    implementation("com.github.kvs-coder:HealthConnectReporter:0.0.0") // x-release-please-version
+    implementation("com.github.kvs-coder:HealthConnectReporter:1.0.0") // x-release-please-version
 }
 ```
 
