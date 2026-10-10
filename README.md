@@ -11,7 +11,7 @@ Health Connect types never appear in the public API: you work with `HealthType`,
 
 It is the Health Connect sibling of [HealthKitReporter](https://github.com/kvs-coder/HealthKitReporter) and [SamsungHealthReporter](https://github.com/kvs-coder/SamsungHealthReporter) and follows the same design: one `HealthConnectReporter` with a **reader**, a **writer**, an **observer** and a **manager**.
 
-> **Status**: under construction. The facade, availability check, types, payloads, the reader and the writer exist; the services follow (see `AGENTS.md`). Nothing is released yet.
+> **Status**: under construction. The facade, availability check, types, payloads, the reader, writer and observer exist; the services follow (see `AGENTS.md`). Nothing is released yet.
 
 ## Requirements
 
@@ -101,6 +101,55 @@ reporter.writer.delete(HealthType.STEPS, TimeRange.day())
 ```
 
 Samples are written as manual entries unless `recordingMethod` says otherwise; actively and automatically recorded samples need a `device`.
+
+### Observing changes
+
+```kotlin
+// Once: remember where the change history ends
+val anchor: Anchor = reporter.observer.anchor(setOf(HealthType.STEPS, HealthType.HEART_RATE))
+prefs.edit { putString("anchor", anchor.json) }
+
+// Later: everything that changed since, and the anchor to store next
+val changes: ChangeSet = reporter.observer.changes(Anchor.decode(prefs.getString("anchor", null)!!))
+changes.upserted   // inserted or updated samples
+changes.deletedIds // ids of deleted records
+prefs.edit { putString("anchor", changes.anchor.json) }
+
+// While on screen: poll every minute, only non-empty change sets
+reporter.observer.observe(anchor).collect { changeSet -> /* … */ }
+```
+
+Health Connect keeps changes for 30 days; an older anchor throws `HealthConnectException.AnchorExpired`, after which you read the data again in full and take a new anchor.
+
+#### In the background
+
+The observer does not schedule work. Use WorkManager and request the `android.permission.health.READ_HEALTH_DATA_IN_BACKGROUND` permission (check `Feature.READ_HEALTH_DATA_IN_BACKGROUND` first):
+
+```kotlin
+class HealthSyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
+    override suspend fun doWork(): Result {
+        val reporter = HealthConnectReporter(applicationContext)
+        val stored = store.anchor() ?: return Result.success()
+        return try {
+            val changes = reporter.observer.changes(stored)
+            upload(changes)
+            store.save(changes.anchor)
+            Result.success()
+        } catch (expired: HealthConnectException.AnchorExpired) {
+            store.save(reporter.observer.anchor(types))
+            Result.success() // read the data again in full
+        } catch (failure: HealthConnectException.Platform) {
+            Result.retry()
+        }
+    }
+}
+
+WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+    "health-sync",
+    ExistingPeriodicWorkPolicy.KEEP,
+    PeriodicWorkRequestBuilder<HealthSyncWorker>(15, TimeUnit.MINUTES).build(),
+)
+```
 
 ### Manifest
 

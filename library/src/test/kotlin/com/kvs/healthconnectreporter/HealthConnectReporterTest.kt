@@ -56,6 +56,7 @@ class HealthConnectReporterTest {
         assertSame(client, sut.client)
         assertSame(client, sut.reader.client)
         assertNotNull(sut.writer)
+        assertNotNull(sut.observer)
     }
 
     @Test

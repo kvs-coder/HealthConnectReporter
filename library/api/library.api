@@ -36,6 +36,7 @@ public final class com/kvs/healthconnectreporter/HealthConnectException$Platform
 public final class com/kvs/healthconnectreporter/HealthConnectReporter {
 	public static final field Companion Lcom/kvs/healthconnectreporter/HealthConnectReporter$Companion;
 	public fun <init> (Landroid/content/Context;)V
+	public final fun getObserver ()Lcom/kvs/healthconnectreporter/service/HealthConnectObserver;
 	public final fun getReader ()Lcom/kvs/healthconnectreporter/service/HealthConnectReader;
 	public final fun getWriter ()Lcom/kvs/healthconnectreporter/service/HealthConnectWriter;
 }
@@ -81,6 +82,34 @@ public final class com/kvs/healthconnectreporter/model/Aggregate$Companion : com
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class com/kvs/healthconnectreporter/model/Anchor : com/kvs/healthconnectreporter/model/Payload {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/Anchor$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;)Lcom/kvs/healthconnectreporter/model/Anchor;
+	public static synthetic fun copy$default (Lcom/kvs/healthconnectreporter/model/Anchor;Ljava/lang/String;ILjava/lang/Object;)Lcom/kvs/healthconnectreporter/model/Anchor;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getJson ()Ljava/lang/String;
+	public final fun getToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class com/kvs/healthconnectreporter/model/Anchor$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/Anchor$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/kvs/healthconnectreporter/model/Anchor;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/kvs/healthconnectreporter/model/Anchor;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/Anchor$Companion : com/kvs/healthconnectreporter/model/Payload$Factory {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class com/kvs/healthconnectreporter/model/Availability : java/lang/Enum {
 	public static final field AVAILABLE Lcom/kvs/healthconnectreporter/model/Availability;
 	public static final field Companion Lcom/kvs/healthconnectreporter/model/Availability$Companion;
@@ -92,6 +121,39 @@ public final class com/kvs/healthconnectreporter/model/Availability : java/lang/
 }
 
 public final class com/kvs/healthconnectreporter/model/Availability$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/ChangeSet : com/kvs/healthconnectreporter/model/Payload {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/ChangeSet$Companion;
+	public fun <init> (Ljava/util/List;Ljava/util/List;Lcom/kvs/healthconnectreporter/model/Anchor;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Lcom/kvs/healthconnectreporter/model/Anchor;
+	public final fun copy (Ljava/util/List;Ljava/util/List;Lcom/kvs/healthconnectreporter/model/Anchor;)Lcom/kvs/healthconnectreporter/model/ChangeSet;
+	public static synthetic fun copy$default (Lcom/kvs/healthconnectreporter/model/ChangeSet;Ljava/util/List;Ljava/util/List;Lcom/kvs/healthconnectreporter/model/Anchor;ILjava/lang/Object;)Lcom/kvs/healthconnectreporter/model/ChangeSet;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnchor ()Lcom/kvs/healthconnectreporter/model/Anchor;
+	public final fun getDeletedIds ()Ljava/util/List;
+	public fun getJson ()Ljava/lang/String;
+	public final fun getUpserted ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isEmpty ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class com/kvs/healthconnectreporter/model/ChangeSet$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/ChangeSet$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/kvs/healthconnectreporter/model/ChangeSet;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/kvs/healthconnectreporter/model/ChangeSet;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/ChangeSet$Companion : com/kvs/healthconnectreporter/model/Payload$Factory {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -5135,6 +5197,14 @@ public final class com/kvs/healthconnectreporter/model/type/Vo2MaxMeasurementMet
 
 public final class com/kvs/healthconnectreporter/model/type/Vo2MaxMeasurementMethod$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/service/HealthConnectObserver {
+	public final fun anchor (Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun anchor$default (Lcom/kvs/healthconnectreporter/service/HealthConnectObserver;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun changes (Lcom/kvs/healthconnectreporter/model/Anchor;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun observe-HG0u8IE (Lcom/kvs/healthconnectreporter/model/Anchor;J)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun observe-HG0u8IE$default (Lcom/kvs/healthconnectreporter/service/HealthConnectObserver;Lcom/kvs/healthconnectreporter/model/Anchor;JILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public final class com/kvs/healthconnectreporter/service/HealthConnectReader {
