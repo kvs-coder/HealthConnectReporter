@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 public enum class Feature {
-    /** reading health data in the background */
+    /** reading health data in the background, **Permission.ReadInBackground** */
     READ_HEALTH_DATA_IN_BACKGROUND,
 
     /** skin temperature, [HealthType.SKIN_TEMPERATURE] */
@@ -18,7 +18,7 @@ public enum class Feature {
     /** planned exercise sessions, [HealthType.PLANNED_EXERCISE_SESSION] */
     PLANNED_EXERCISE,
 
-    /** reading data older than 30 days before the first grant */
+    /** reading data older than 30 days before the first grant, **Permission.ReadHistory** */
     READ_HEALTH_DATA_HISTORY,
 
     /** mindfulness sessions, [HealthType.MINDFULNESS_SESSION] */

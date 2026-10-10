@@ -36,6 +36,7 @@ public final class com/kvs/healthconnectreporter/HealthConnectException$Platform
 public final class com/kvs/healthconnectreporter/HealthConnectReporter {
 	public static final field Companion Lcom/kvs/healthconnectreporter/HealthConnectReporter$Companion;
 	public fun <init> (Landroid/content/Context;)V
+	public final fun getManager ()Lcom/kvs/healthconnectreporter/service/HealthConnectManager;
 	public final fun getObserver ()Lcom/kvs/healthconnectreporter/service/HealthConnectObserver;
 	public final fun getReader ()Lcom/kvs/healthconnectreporter/service/HealthConnectReader;
 	public final fun getWriter ()Lcom/kvs/healthconnectreporter/service/HealthConnectWriter;
@@ -272,6 +273,69 @@ public abstract class com/kvs/healthconnectreporter/model/Payload$Factory {
 	public final fun collect (Ljava/util/List;)Ljava/util/List;
 	public final fun decode (Ljava/lang/String;)Ljava/lang/Object;
 	public final fun make (Ljava/util/Map;)Ljava/lang/Object;
+}
+
+public abstract interface class com/kvs/healthconnectreporter/model/Permission {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/Permission$Companion;
+}
+
+public final class com/kvs/healthconnectreporter/model/Permission$Companion {
+	public final fun of (Ljava/util/Collection;Ljava/util/Set;)Ljava/util/Set;
+	public static synthetic fun of$default (Lcom/kvs/healthconnectreporter/model/Permission$Companion;Ljava/util/Collection;Ljava/util/Set;ILjava/lang/Object;)Ljava/util/Set;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/Permission$Data : com/kvs/healthconnectreporter/model/Permission {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/Permission$Data$Companion;
+	public fun <init> (Lcom/kvs/healthconnectreporter/model/type/HealthType;Lcom/kvs/healthconnectreporter/model/type/AccessType;)V
+	public final fun component1 ()Lcom/kvs/healthconnectreporter/model/type/HealthType;
+	public final fun component2 ()Lcom/kvs/healthconnectreporter/model/type/AccessType;
+	public final fun copy (Lcom/kvs/healthconnectreporter/model/type/HealthType;Lcom/kvs/healthconnectreporter/model/type/AccessType;)Lcom/kvs/healthconnectreporter/model/Permission$Data;
+	public static synthetic fun copy$default (Lcom/kvs/healthconnectreporter/model/Permission$Data;Lcom/kvs/healthconnectreporter/model/type/HealthType;Lcom/kvs/healthconnectreporter/model/type/AccessType;ILjava/lang/Object;)Lcom/kvs/healthconnectreporter/model/Permission$Data;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAccess ()Lcom/kvs/healthconnectreporter/model/type/AccessType;
+	public final fun getHealthType ()Lcom/kvs/healthconnectreporter/model/type/HealthType;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class com/kvs/healthconnectreporter/model/Permission$Data$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/Permission$Data$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/kvs/healthconnectreporter/model/Permission$Data;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/kvs/healthconnectreporter/model/Permission$Data;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/Permission$Data$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/model/Permission$ReadHistory : com/kvs/healthconnectreporter/model/Permission {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/Permission$ReadHistory;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/kvs/healthconnectreporter/model/Permission$ReadInBackground : com/kvs/healthconnectreporter/model/Permission {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/Permission$ReadInBackground;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/kvs/healthconnectreporter/model/Permission$WriteExerciseRoute : com/kvs/healthconnectreporter/model/Permission {
+	public static final field INSTANCE Lcom/kvs/healthconnectreporter/model/Permission$WriteExerciseRoute;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+	public fun toString ()Ljava/lang/String;
 }
 
 public abstract interface class com/kvs/healthconnectreporter/model/TimeGroup {
@@ -4558,6 +4622,19 @@ public final class com/kvs/healthconnectreporter/model/payload/WritableSample$Co
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class com/kvs/healthconnectreporter/model/type/AccessType : java/lang/Enum {
+	public static final field Companion Lcom/kvs/healthconnectreporter/model/type/AccessType$Companion;
+	public static final field READ Lcom/kvs/healthconnectreporter/model/type/AccessType;
+	public static final field WRITE Lcom/kvs/healthconnectreporter/model/type/AccessType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/kvs/healthconnectreporter/model/type/AccessType;
+	public static fun values ()[Lcom/kvs/healthconnectreporter/model/type/AccessType;
+}
+
+public final class com/kvs/healthconnectreporter/model/type/AccessType$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class com/kvs/healthconnectreporter/model/type/Aggregation : java/lang/Enum {
 	public static final field ACTIVE_CALORIES_BURNED_ACTIVE_CALORIES_TOTAL Lcom/kvs/healthconnectreporter/model/type/Aggregation;
 	public static final field BASAL_METABOLIC_RATE_BASAL_CALORIES_TOTAL Lcom/kvs/healthconnectreporter/model/type/Aggregation;
@@ -5197,6 +5274,18 @@ public final class com/kvs/healthconnectreporter/model/type/Vo2MaxMeasurementMet
 
 public final class com/kvs/healthconnectreporter/model/type/Vo2MaxMeasurementMethod$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/kvs/healthconnectreporter/service/HealthConnectManager {
+	public static final field HEALTH_CONNECT_PACKAGE Ljava/lang/String;
+	public static final field PLAY_STORE_PACKAGE Ljava/lang/String;
+	public final fun grantedPermissions (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun installIntent (Landroid/content/Context;)Landroid/content/Intent;
+	public final fun isFeatureAvailable (Lcom/kvs/healthconnectreporter/model/type/Feature;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun permissionContract ()Landroidx/activity/result/contract/ActivityResultContract;
+	public final fun requestPermissions (Landroidx/activity/ComponentActivity;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun revokeAllPermissions (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun settingsIntent (Landroid/content/Context;)Landroid/content/Intent;
 }
 
 public final class com/kvs/healthconnectreporter/service/HealthConnectObserver {

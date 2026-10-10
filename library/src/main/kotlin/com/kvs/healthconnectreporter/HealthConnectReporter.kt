@@ -3,6 +3,7 @@ package com.kvs.healthconnectreporter
 import android.content.Context
 import androidx.health.connect.client.HealthConnectClient
 import com.kvs.healthconnectreporter.model.Availability
+import com.kvs.healthconnectreporter.service.HealthConnectManager
 import com.kvs.healthconnectreporter.service.HealthConnectObserver
 import com.kvs.healthconnectreporter.service.HealthConnectReader
 import com.kvs.healthconnectreporter.service.HealthConnectWriter
@@ -24,6 +25,9 @@ public class HealthConnectReporter internal constructor(
 
     /** **HealthConnectObserver** reads and polls changes */
     public val observer: HealthConnectObserver = HealthConnectObserver(client)
+
+    /** **HealthConnectManager** permissions, features and Health Connect screens */
+    public val manager: HealthConnectManager = HealthConnectManager(client)
 
     /**
      * Connects to Health Connect.

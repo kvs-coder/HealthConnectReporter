@@ -11,7 +11,7 @@ Health Connect types never appear in the public API: you work with `HealthType`,
 
 It is the Health Connect sibling of [HealthKitReporter](https://github.com/kvs-coder/HealthKitReporter) and [SamsungHealthReporter](https://github.com/kvs-coder/SamsungHealthReporter) and follows the same design: one `HealthConnectReporter` with a **reader**, a **writer**, an **observer** and a **manager**.
 
-> **Status**: under construction. The facade, availability check, types, payloads, the reader, writer and observer exist; the services follow (see `AGENTS.md`). Nothing is released yet.
+> **Status**: under construction. The facade, availability check, types, payloads and all four services (reader, writer, observer, manager) exist; the demo app follows (see `AGENTS.md`). Nothing is released yet.
 
 ## Requirements
 
@@ -150,6 +150,28 @@ WorkManager.getInstance(context).enqueueUniquePeriodicWork(
     PeriodicWorkRequestBuilder<HealthSyncWorker>(15, TimeUnit.MINUTES).build(),
 )
 ```
+
+### Permissions and Health Connect screens
+
+```kotlin
+// Ask for read and write access to every type you use (each must be in your manifest)
+val granted: Set<Permission> = reporter.manager.requestPermissions(
+    activity = this, // a ComponentActivity
+    permissions = Permission.of(listOf(HealthType.STEPS, HealthType.HEART_RATE)) + Permission.ReadHistory,
+)
+
+// Or register the library-typed contract yourself
+val request = registerForActivityResult(reporter.manager.permissionContract()) { granted -> /* … */ }
+request.launch(setOf(Permission.Data(HealthType.WEIGHT, AccessType.READ)))
+
+reporter.manager.grantedPermissions()
+reporter.manager.revokeAllPermissions()
+reporter.manager.isFeatureAvailable(Feature.SKIN_TEMPERATURE)
+startActivity(reporter.manager.settingsIntent(context))
+startActivity(reporter.manager.installIntent(context)) // when availability is UPDATE_REQUIRED
+```
+
+Requesting a permission the manifest does not declare throws `HealthConnectException.InvalidValue`; a permission that needs a missing feature throws `NotAvailable`. `STEPS` / `STEPS_CADENCE`, `EXERCISE_SESSION` / `CYCLING_PEDALING_CADENCE` and `MENSTRUATION_FLOW` / `MENSTRUATION_PERIOD` share one Health Connect permission each, so granting one grants both.
 
 ### Manifest
 
