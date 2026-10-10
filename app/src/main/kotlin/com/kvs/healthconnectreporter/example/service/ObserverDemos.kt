@@ -21,7 +21,12 @@ class ObserverDemos(
     private val anchors = mutableMapOf<HealthType, Anchor>()
 
     private val observe =
-        DemoRow("observer.observe", "Observe steps every 10 s (tap again to stop)", "observer.observe")
+        DemoRow(
+            "observer.observe",
+            "Observe steps every 10 s (tap again to stop)",
+            "observer.observe",
+            isInteractive = true,
+        )
     private val changeRows =
         HealthType.entries.associateBy { type ->
             DemoRow(

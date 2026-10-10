@@ -34,6 +34,11 @@ sealed interface DemoEvent {
         val activity: ComponentActivity,
     ) : DemoEvent
 
+    /** Runs every non-interactive demo one after another and logs each result. */
+    data class RunAllTapped(
+        val activity: ComponentActivity,
+    ) : DemoEvent
+
     /** Clears every result. */
     data object ClearTapped : DemoEvent
 }

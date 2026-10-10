@@ -55,7 +55,10 @@ fun DemoScreen(
         topBar = {
             TopAppBar(
                 title = { Text("HealthConnectReporter") },
-                actions = { TextButton(onClick = { onEvent(DemoEvent.ClearTapped) }) { Text("Clear") } },
+                actions = {
+                    TextButton(onClick = { onEvent(DemoEvent.RunAllTapped(activity)) }) { Text("Run all") }
+                    TextButton(onClick = { onEvent(DemoEvent.ClearTapped) }) { Text("Clear") }
+                },
             )
         },
     ) { padding ->

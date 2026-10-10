@@ -28,6 +28,21 @@ class HealthConnectReporterService(
 
     val sections: List<DemoSection> get() = performers.map { it.section }
 
+    /**
+     * Every non-interactive row, ordered so each produces a meaningful result: anchors before writes, reads and
+     * changes after them, deletions (which clean up the demo data) last.
+     */
+    val runAllRows: List<DemoRow>
+        get() {
+            val rows = sections.flatMap { it.rows }.filterNot { it.isInteractive }
+            val (manager, rest) = rows.partition { it.id.startsWith("manager.") }
+            val changes = rest.filter { it.id.startsWith("observer.changes.") }
+            val deletions = rest.filter { it.id.startsWith("writer.delete") }.sortedBy { it.id == "writer.deleteToday" }
+            val writes = rest.filter { it.id.startsWith("writer.") } - deletions.toSet()
+            val reads = rest.filter { it.id.startsWith("reader.") }
+            return manager + changes + writes + reads + changes + deletions + changes
+        }
+
     fun publisher(
         row: DemoRow,
         activity: ComponentActivity,

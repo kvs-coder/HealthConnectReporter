@@ -59,6 +59,21 @@ class WriterDemos(
                 inserted.remove(HealthType.STEPS)
                 "Deleted"
             },
+            DemoRow(
+                "writer.deleteToday",
+                "Delete today's data of every type written by this app",
+                "writer.delete(type, range) × every type",
+            ) to {
+                val manager = reporter().manager
+                val types =
+                    HealthType.entries.filter { type ->
+                        type.feature?.let { manager.isFeatureAvailable(it) }
+                            ?: true
+                    }
+                types.forEach { writer.delete(it, TimeRange.day()) }
+                inserted.clear()
+                "Deleted today's ${types.size} types"
+            },
             DemoRow("writer.deleteInserted", "Delete every inserted sample", "writer.delete(sample)") to {
                 val samples = inserted.values.toList()
                 samples.forEach { writer.delete(it) }
